@@ -1,8 +1,13 @@
+var express = require('express');
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
+
+
 var dishRouter = express.Router();
 
 dishRouter.use(bodyParser.json());
 
-exports.dishRouter.route('/')
+dishRouter.route('/')
 .all(function(req,res,next) {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       next();
@@ -20,7 +25,7 @@ exports.dishRouter.route('/')
         res.end('Deleting all dishes');
 });
 
-exports.dishRouter.route('/:dishId')
+dishRouter.route('/:dishId')
 .all(function(req,res,next) {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       next();
@@ -39,3 +44,5 @@ exports.dishRouter.route('/:dishId')
 .delete(function(req, res, next){
         res.end('Deleting dish: ' + req.params.dishId);
 });
+
+module.exports = dishRouter;
